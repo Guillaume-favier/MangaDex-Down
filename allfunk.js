@@ -1,9 +1,10 @@
 const axios = require('axios')
 const racine = "https://api.mangadex.org"
-const request = require('request')
 const colors = require('colors/safe');
+const fs = require("fs")
 const fetch = require('node-fetch');
 const prompt = require('prompt-sync')({sigint: true});
+const l = fs.readFileSync('./lang.json','utf-8')
 const highttest = (ques) => {
 	while (true) {
 		const un = prompt(ques+" [oui/non] > ")
@@ -18,8 +19,6 @@ const highttest = (ques) => {
 }
 const hi = highttest("Voulez vous des images de bonne qualité ?")
 
-const fs = require('fs');
-const { title } = require('node:process')
 const ttext = (obj) => {
 	return JSON.stringify(obj,null,4)
 }
@@ -28,7 +27,7 @@ const getchap = async (id) =>{
 		let done = false
 		let data = axios(
 			{
-				"url": "https://api.mangadex.org/chapter/"+id, 
+				"url": racine+"/chapter/"+id, 
 				"method":"GET"
 			}
 		)
@@ -61,7 +60,7 @@ const getmanga = async (id) =>{
 		let done = false
 		let data = axios(
 			{
-				"url": "https://api.mangadex.org/manga/"+id, 
+				"url": racine+"/manga/"+id, 
 				"method":"GET"
 			}
 		)
@@ -349,5 +348,6 @@ module.exports = {
 	search,
 	prompt,
 	cooldispmangas,
-	dispsearch
+	dispsearch,
+	hi
 }

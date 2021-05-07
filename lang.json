@@ -1,0 +1,15 @@
+{
+    "c": "fr",
+    "fr":{
+        "searchcmd":"recherche",
+        "chaptercmd":"chap",
+        "clearcmd":"clear",
+        "helpcmd":"help",
+        "quitcmd":["exit","quit"],
+        "quitdesc":"ferme le programme",
+        "searchdesc":"permet de rechercher un manga par son titre, son ID ou voir les nouveautés",
+        "chapdesc":"permet de télécharger un chapitre à partir de son ID",
+        "notfound":["La commande : "," n'a pas été trouvé. Entrez "," pour avoir de l'aide"]
+
+    }
+}
