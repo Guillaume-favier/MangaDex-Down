@@ -180,16 +180,10 @@ const search = async(limit=10,offset=0,title="") => {
 	}
 	return new Promise((resolve ,reject)=>{
 		let done = false
-		const args = {
-			"offset":offset,
-			"limit":limit,
-			
-		}
 		let data = axios(
 			{
 				"url": "https://api.mangadex.org/manga?offset="+offset+"&limit="+limit+args, 
-				"method":"GET",
-				"params": args
+				"method":"GET"
 			}
 		)
 		data.then(async (res)=>{
@@ -321,22 +315,23 @@ const dispsearch = async() => {
 				break
 			case "2":
 				const res3 = prompt("manga, ID > ")
-				if (res2 == "exit" || res2 == "quit") break
-				const [resp2, err2] = await getmanga(res3)
-				if (err2 != "") {
-					console.error(err2)
-					return
-				}
-				// console.log(res)
-				await cooldispmanga(resp2["data"])
-			case "3":
-				const [resp3, err3] = await search()
+				if (res3 == "exit" || res3 == "quit") break
+				const [resp3, err3] = await getmanga(res3)
 				if (err3 != "") {
 					console.error(err3)
 					return
 				}
 				// console.log(res)
-				cooldispmangas(resp3["data"]["results"])
+				await cooldispmanga(resp3["data"])
+				break
+			case "3":
+				const [resp4, err4] = await search()
+				if (err4 != "") {
+					console.error(err4)
+					return
+				}
+				// console.log(res)
+				cooldispmangas(resp4["data"]["results"])
 				break
 			default:
 				break;
