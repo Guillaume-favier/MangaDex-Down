@@ -1,9 +1,8 @@
 const colors = require('colors/safe');
 const title = require('./title.js')
-const data = require('./lang.json')
+
 
 const {
-	getvischap,
 	cooldisp,
 	ttext,
 	getmanga,
@@ -13,10 +12,12 @@ const {
 	prompt,
 	cooldispmangas,
 	dispsearch,
-	hi
+	hi,
+	ll,
+	dlallchap
 } = require('./allfunk.js')
 
-const ll = data[data["c"]]
+
 let done = false
 const main = async () => {
 	while (!done) {
@@ -26,14 +27,14 @@ const main = async () => {
 		}else if (command == ll["searchcmd"]){
 			await dispsearch()
 		}else if(command == ll["chaptercmd"]){
-			await getvischap(hi)
+			await dlallchap(hi)
 		}else if(command == ll["helpcmd"]){
 			console.log("  - "+colors.blue(ll["quitcmd"][0])+", "+colors.blue(ll["quitcmd"][1])+" : "+ll["quitdesc"]+"\n  - "+colors.blue(ll["searchcmd"])+" : "+ll["searchdesc"]+"\n  - "+colors.blue(ll["chaptercmd"])+" : "+ll["chapdesc"])
 		}else if(command == ll["clearcmd"]){
 			console.clear();
 		}
 		else{
-			console.log(ll["notfound"][0]+"\""+command+"\""+ll["notfound"][1]+"\"help\""+notfound[2])
+			console.log(ll["notfound"][0]+"\""+command+"\""+ll["notfound"][1]+"\"help\""+ll["notfound"][2])
 		}
 	}
 }
