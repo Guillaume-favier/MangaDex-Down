@@ -1,23 +1,38 @@
-const axios = require('axios')
-const racine = "https://api.mangadex.org"
-const LiamLink = "https://mangadex.org/chapter/1110565/2"
-const secret = require("./secret")
-const fs = require('fs');
-let data = axios(
-	{
-		"url": escape("https")+":"+escape("//api.mangadex.org/chapter/6ca173ec-be04-432f-9e21-a74c818dd799"), 
-		"method":"GET",
-		// "options":{
-		// 	"username":"Nimpsta",
-		// 	"password":"fs61ov28&*",
-		// 	"email":"favier.guillaume02@gmail.com"
-		// }
+const colors = require('colors/safe');
+const title = require('./title.js')
+
+const {
+	getvischap,
+	cooldisp,
+	ttext,
+	getmanga,
+	getchap,
+	highttest,
+	search,
+	prompt,
+	cooldispmangas,
+	dispsearch
+} = require('./allfunk.js')
+
+
+let done = false
+const main = async () => {
+	while (!done) {
+		const command = prompt(">").toLowerCase()
+		if (command == "exit" || command == "quit" ) {
+			process.exit(0)
+		}else if (command == "recherche"){
+			await dispsearch()
+		}else if(command == "chap"){
+			await getvischap()
+		}else if(command == "help"){
+			console.log("  - "+colors.blue("exit")+", "+colors.blue("quit")+" : ferme le programme\n  - "+colors.blue("recherche")+" : permet de rechercher un manga par son titre, son ID ou voir les nouveautés\n  - "+colors.blue("chap")+" : permet de télécharger un chapitre à partir de son ID")
+		}else if(command == "clear" || command == "^L"){
+			console.clear();
+		}
+		else{
+			console.log("La commande : \""+command+"\" n'a pas été trouvé. Entrez \"help\" pour avoir de l'aide")
+		}
 	}
-)
-data.then((res)=>{
-	console.log(`statusCode: ${res.statusCode}`)
-	const data = JSON.stringify(res["data"],null,4);
-	fs.writeFileSync('./output.json', data, 'utf8');
-	console.log(res)
-})
-data.catch(err => console.log(err));
+}
+main()
